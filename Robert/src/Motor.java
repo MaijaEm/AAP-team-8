@@ -1,5 +1,8 @@
 
+import java.io.File;
+
 import lejos.hardware.Button;
+import lejos.hardware.Sound;
 import lejos.hardware.lcd.LCD;
 import lejos.hardware.motor.EV3LargeRegulatedMotor;
 import lejos.hardware.port.MotorPort;
@@ -29,29 +32,31 @@ public class Motor extends Thread {
 
 			int mode = DEObj.getMode();
 			switch (mode) {
+
 			case 0:
 				LCD.refresh();
 				LCD.drawString("Press any button.", 1, 1);
 				if (Button.getButtons() != 0) {
-					Delay.msDelay(3000);
+					Delay.msDelay(2000);
 					DEObj.setMode(1);
 				}
 				break;
-			case 1:
-				
-				//Test timer display
-				long startTime = System.currentTimeMillis();
-				
-				while (DEObj.getMode() != 0 && DEObj.getMode() != 5) {
-					long elapsedTime = System.currentTimeMillis() - startTime;
-					long elapsedSeconds = elapsedTime / 1000;
-					long secondsDisplay = elapsedSeconds % 60;
-					long elapsedMinutes = elapsedSeconds / 60;
-				
-				System.out.println(elapsedMinutes + ":" + secondsDisplay);
-				
-				}
 
+			case 1:
+
+				// Test timer display
+//				long startTime = System.currentTimeMillis();
+//				
+//				while (DEObj.getMode() != 0 && DEObj.getMode() != 5) {
+//					long elapsedTime = System.currentTimeMillis() - startTime;
+//					long elapsedSeconds = elapsedTime / 1000;
+//					long secondsDisplay = elapsedSeconds % 60;
+//					long elapsedMinutes = elapsedSeconds / 60;
+//				
+//				System.out.println(elapsedMinutes + ":" + secondsDisplay);
+//				
+//				}
+				LCD.clear();
 				leftMotor.forward();
 				rightMotor.forward();
 				if (DEObj.getBrightness_value() < DEObj.getBrightnessThreshold()) {
@@ -62,55 +67,70 @@ public class Motor extends Thread {
 					rightMotor.setSpeed(250);
 				}
 				if (DEObj.getDistancevalue() < DEObj.getSecurityDistance()) {
+					leftMotor.stop();
+					rightMotor.stop();
 					DEObj.setMode(2);
 				}
+				if (Button.getButtons() != 0) {
+					break;
+				}
 				break;
+
 			case 2:
-				leftMotor.stop();
-				rightMotor.stop();
-//				LCD.clear();
-//				LCD.drawString("Object found!", 1, 1);
-//				Sound.playSample(new File("smb_mat.wav"), Sound.VOL_MAX);
 				rightMotor.setSpeed(300);
 				rightMotor.rotate(-250);
 				DEObj.setMode(3);
+				if (Button.getButtons() != 0) {
+					break;
+				}
 				break;
 
 			case 3:
-//				chassis.arc(-400, 180);
-//				LCD.clear();
-//				LCD.drawString("DOING ARC", 1, 1);
 				leftMotor.forward();
 				rightMotor.forward();
-				leftMotor.setSpeed(200);
-				rightMotor.setSpeed(300);
+				leftMotor.setSpeed(300);
+				rightMotor.setSpeed(400);
 				if (DEObj.getBrightness_value() < DEObj.getBrightnessThreshold()) {
+					leftMotor.stop();
+					rightMotor.stop();
 					DEObj.setMode(4);
 				}
+				if (Button.getButtons() != 0) {
+					break;
+				}
 				break;
+
 			case 4:
 				leftMotor.forward();
 				rightMotor.forward();
 				if (DEObj.getBrightness_value() < DEObj.getBrightnessThreshold()) {
-					leftMotor.setSpeed(300);
+					leftMotor.setSpeed(250);
 					rightMotor.setSpeed(80);
 				} else {
 					leftMotor.setSpeed(80);
-					rightMotor.setSpeed(300);
+					rightMotor.setSpeed(250);
 				}
 				if (DEObj.getDistancevalue() < DEObj.getSecurityDistance()) {
+					leftMotor.stop();
+					rightMotor.stop();
 					DEObj.setMode(5);
 				}
+				if (Button.getButtons() != 0) {
+					break;
+				}
 				break;
+
 			case 5:
-				LCD.clear();
-				rightMotor.forward();
-				rightMotor.rotate(180);
-				leftMotor.forward();
-				leftMotor.rotate(180);
+				LCD.drawString("COMPLETED!", 1, 1);
+				chassis.setSpeed(300, 300);
+				chassis.arc(0, 1000);
+				Sound.setVolume(100);
+				Sound.playSample(new File("stage clear.wav"), Sound.VOL_MAX);
+				if (Button.getButtons() != 0) {
+					break;
+				}
 				break;
 			}
-
 
 //				Sound.playNote(Sound.PIANO, 196, 50);
 //				Sound.playNote(Sound.PIANO, 262, 50);
@@ -131,11 +151,9 @@ public class Motor extends Thread {
 //				Sound.playNote(Sound.PIANO, 622, 200);
 //			}
 
-
 			if (Button.getButtons() != 0) {
 				break;
 			}
 		}
 	}
-
 }
