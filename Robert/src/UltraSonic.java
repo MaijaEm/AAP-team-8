@@ -18,7 +18,7 @@ public class UltraSonic extends Thread {
 
 		while (true) {
 
-			if (DEObj.getMode() != 0) {
+			if (DEObj.getMode() != 0 && DEObj.getMode() != 5) {
 
 				SampleProvider sp = us.getDistanceMode();
 

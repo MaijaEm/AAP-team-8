@@ -15,9 +15,5 @@ public class RobertMain {
 		USObj.start();
 		CSObj.start();
 		MObj.start();
-		
-//		LCD.drawString("Finished", 0, 7);
-//		LCD.refresh();
-//		System.exit(0);
 	}
 }
