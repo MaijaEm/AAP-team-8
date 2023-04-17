@@ -1,6 +1,7 @@
 
 public class DataExchange {
 	
+	//Local variables
 	private boolean obstacleDetected = false;
 	private int mode = 0;
 	private int brightness_value;
@@ -12,9 +13,7 @@ public class DataExchange {
 	public DataExchange() {
 	}
 
-	/*
-	 * Getters & Setters
-	 */
+	//Getters and Setters
 	public void setObstacleDetected(boolean status) {
 		obstacleDetected = status;
 	}
