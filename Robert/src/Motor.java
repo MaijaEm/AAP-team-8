@@ -15,9 +15,12 @@ import lejos.utility.Delay;
 public class Motor extends Thread {
 
 	DataExchange DEObj;
+	
+	//Motor objects
 	RegulatedMotor leftMotor = new EV3LargeRegulatedMotor(MotorPort.A);
 	RegulatedMotor rightMotor = new EV3LargeRegulatedMotor(MotorPort.B);
 
+	//Chassis objects
 	Wheel wheel1 = WheeledChassis.modelWheel(leftMotor, 56).offset(-70);
 	Wheel wheel2 = WheeledChassis.modelWheel(rightMotor, 56).offset(70);
 	Chassis chassis = new WheeledChassis(new Wheel[] { wheel1, wheel2 }, WheeledChassis.TYPE_DIFFERENTIAL);
@@ -29,10 +32,12 @@ public class Motor extends Thread {
 	public void run() {
 
 		while (true) {
+			
 
 			int mode = DEObj.getMode();
 			switch (mode) {
 
+			//Waits 2 seconds after a button has been pressed and moves on
 			case 0:
 				LCD.refresh();
 				LCD.drawString("Press any button.", 1, 1);
@@ -42,6 +47,7 @@ public class Motor extends Thread {
 				}
 				break;
 
+			//Linefollower part
 			case 1:
 
 				// Test timer display
@@ -56,6 +62,7 @@ public class Motor extends Thread {
 //				System.out.println(elapsedMinutes + ":" + secondsDisplay);
 //				
 //				}
+				
 				LCD.clear();
 				leftMotor.forward();
 				rightMotor.forward();
@@ -76,6 +83,7 @@ public class Motor extends Thread {
 				}
 				break;
 
+			//Turning right before dodging obstacle
 			case 2:
 				rightMotor.setSpeed(300);
 				rightMotor.rotate(-250);
@@ -85,6 +93,7 @@ public class Motor extends Thread {
 				}
 				break;
 
+				//Dodging obstacle, calculated using chassis getspeed
 			case 3:
 				leftMotor.forward();
 				rightMotor.forward();
@@ -100,6 +109,7 @@ public class Motor extends Thread {
 				}
 				break;
 
+			//Back to linefollowing
 			case 4:
 				leftMotor.forward();
 				rightMotor.forward();
@@ -120,6 +130,7 @@ public class Motor extends Thread {
 				}
 				break;
 
+			//Victory music and movement
 			case 5:
 				LCD.drawString("COMPLETED!", 1, 1);
 				chassis.setSpeed(300, 300);
