@@ -1,0 +1,10 @@
+#each line defines files, directories and codeowners
+
+Robert/src/RobertMain.java @MaijaEm
+/.github maija22008@student.hamk.fi
+
+Robert/src/DataExchange.java @kiia22004
+/.github kiia22004@student.hamk.fi
+
+Robert/src/Motor.java @nanna22000
+/.github nanna22000@student.hamk.fi
