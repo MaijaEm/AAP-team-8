@@ -62,12 +62,14 @@ public class Motor extends Thread {
 //				}
 
 				LCD.clear();
-				leftMotor.forward();
-				rightMotor.forward();
 				if (DEObj.getBrightness_value() < DEObj.getBrightnessThreshold()) {
+					leftMotor.forward();
+					rightMotor.forward();
 					leftMotor.setSpeed(270);
 					rightMotor.setSpeed(90);
 				} else {
+					leftMotor.forward();
+					rightMotor.forward();
 					leftMotor.setSpeed(90);
 					rightMotor.setSpeed(270);
 				}
@@ -81,7 +83,7 @@ public class Motor extends Thread {
 			// Turning right before dodging obstacle
 			case 2:
 				rightMotor.setSpeed(200);
-			    rightMotor.rotate(-250);
+			    rightMotor.rotate(-270);
 			    while (rightMotor.isMoving()) {
 			    }
 			    DEObj.setMode(3);
@@ -89,7 +91,7 @@ public class Motor extends Thread {
 
 			// Dodging obstacle, calculated using chassis getspeed
 			case 3:
-				leftMotor.setSpeed(210);
+				leftMotor.setSpeed(200);
 				rightMotor.setSpeed(300);
 				leftMotor.forward();
 				rightMotor.forward();
@@ -100,27 +102,37 @@ public class Motor extends Thread {
 					DEObj.setMode(4);
 				}
 				break;
+				
+			case 4:
+				rightMotor.setSpeed(200);
+			    rightMotor.rotate(-150);
+			    while (rightMotor.isMoving()) {
+			    }
+			    DEObj.setMode(5);
+			    break;
 
 			// Back to linefollowing
-			case 4:
-				leftMotor.forward();
-				rightMotor.forward();
+			case 5:
 				if (DEObj.getBrightness_value() < DEObj.getBrightnessThreshold()) {
 					leftMotor.setSpeed(270);
 					rightMotor.setSpeed(90);
+					leftMotor.forward();
+					rightMotor.forward();
 				} else {
 					leftMotor.setSpeed(90);
 					rightMotor.setSpeed(270);
+					leftMotor.forward();
+					rightMotor.forward();
 				}
 				if (DEObj.getDistancevalue() < DEObj.getSecurityDistance()) {
 					leftMotor.stop();
 					rightMotor.stop();
-					DEObj.setMode(5);
+					DEObj.setMode(6);
 				}
 				break;
 
 			// Victory music and movement
-			case 5:
+			case 6:
 				LCD.drawString("COMPLETED!", 1, 1);
 
 				leftMotor.setSpeed(300);
