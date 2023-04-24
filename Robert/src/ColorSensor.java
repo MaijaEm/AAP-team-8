@@ -18,7 +18,7 @@ public class ColorSensor extends Thread {
 
 		while (true) {
 
-			if (DEObj.getMode() != 0 && DEObj.getMode() != 5) {
+			if (DEObj.getMode() != 0 && DEObj.getMode() != 6) {
 
 				cs.setFloodlight(true);
 
