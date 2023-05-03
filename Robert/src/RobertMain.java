@@ -10,6 +10,7 @@ public class RobertMain {
 	private static ColorSensor CSObj;
 	private static UltraSonic USObj;
 	private static Motor MObj;
+	private static EV3data EVObj;
 	
 
 	//Creating the main method
@@ -20,8 +21,10 @@ public class RobertMain {
 		USObj = new UltraSonic(DE);
 		CSObj = new ColorSensor(DE);
 		MObj = new Motor(DE);
+		EVObj = new EV3data(DE);
 		USObj.start();
 		CSObj.start();
 		MObj.start();
+		EVObj.start();
 	}
 }

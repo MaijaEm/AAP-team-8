@@ -5,6 +5,7 @@ import lejos.hardware.sensor.EV3ColorSensor;
 import lejos.robotics.SampleProvider;
 
 public class ColorSensor extends Thread {
+	
 	DataExchange DEObj;
 
 	private EV3ColorSensor cs;
@@ -18,7 +19,7 @@ public class ColorSensor extends Thread {
 
 		while (true) {
 
-			if (DEObj.getMode() != 0 && DEObj.getMode() != 5) {
+			if (DEObj.getMode() != 0 && DEObj.getMode() != 6) {
 
 				cs.setFloodlight(true);
 
