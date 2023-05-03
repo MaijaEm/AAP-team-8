@@ -89,7 +89,7 @@ public class Motor extends Thread {
 			// Turning right before dodging obstacle
 			case 2:
 				rightMotor.setSpeed(200);
-			    rightMotor.rotate(-270);
+			    rightMotor.rotate(DEObj.getRotation());
 			    while (rightMotor.isMoving()) {
 			    }
 			    DEObj.setMode(3);
@@ -97,8 +97,8 @@ public class Motor extends Thread {
 
 			// Dodging obstacle, calculated using chassis getspeed
 			case 3:
-				leftMotor.setSpeed(200);
-				rightMotor.setSpeed(300);
+				leftMotor.setSpeed(DEObj.getSpeed1());
+				rightMotor.setSpeed(DEObj.getSpeed2());
 				leftMotor.forward();
 				rightMotor.forward();
 

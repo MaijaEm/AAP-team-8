@@ -58,9 +58,7 @@ public class EV3data extends Thread {
 //			url = new URL("https://ev3test-380115.appspot.com/rest/ev3service/sayhello");
 //			url = new URL("http://192.168.0.102:8080/rest/ev3service/sayhello");
 //			url = new URL("http://192.168.1.64:8080/rest/laptopservive/servicename");
-				url = new URL("http://192.168.1.33:8080/rest/ev3/addspeed");
-				url = new URL("http://192.168.1.33:8080/rest/ev3/addrotation");
-				url = new URL("http://192.168.1.33:8080/rest/ev3/getspeed");
+				url = new URL("http://192.168.1.33:8080/rest/ev3/getall");
 //			url = new URL("http://192.168.0.101");
 				conn = (HttpURLConnection) url.openConnection();
 				System.out.println(conn.toString()); // Tulostaa vain URLin
@@ -81,10 +79,14 @@ public class EV3data extends Thread {
 //				System.out.println(s);
 //			}
 				s = br.readLine();
-				String[] speeds = s.split(" ");
+				String[] info = s.split(" ");
 
-				DEObj.setSpeedMotor1(speeds[0]);
-				DEObj.setSpeedMotor2(speeds[1]);
+				DEObj.setSpeedMotor1(info[0]);
+				DEObj.setSpeedMotor2(info[1]);
+				DEObj.setRotation(info[2]);
+				DEObj.setSpeed1(info[3]);
+				DEObj.setSpeed2(info[4]);
+				DEObj.setSecurityDistance(info[5]);
 
 			} catch (Exception e) {
 				e.printStackTrace();
