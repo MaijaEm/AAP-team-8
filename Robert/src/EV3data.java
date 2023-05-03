@@ -36,6 +36,8 @@ public class EV3data extends Thread {
 
 		while (true) {
 
+			//Put thread to sleep for two seconds
+
 			try {
 				Thread.sleep(2000);
 			} catch (InterruptedException e) {
@@ -55,6 +57,12 @@ public class EV3data extends Thread {
 
 			String s = null;
 			try {
+
+				//Wifi connection and rest service path
+				url = new URL("http://192.168.1.33:8080/rest/ev3/getall");
+				conn = (HttpURLConnection) url.openConnection();
+				System.out.println(conn.toString()); // Prints URL
+
 //			url = new URL("https://ev3test-380115.appspot.com/rest/ev3service/sayhello");
 //			url = new URL("http://192.168.0.102:8080/rest/ev3service/sayhello");
 //			url = new URL("http://192.168.1.64:8080/rest/laptopservive/servicename");
@@ -62,6 +70,7 @@ public class EV3data extends Thread {
 //			url = new URL("http://192.168.0.101");
 				conn = (HttpURLConnection) url.openConnection();
 				System.out.println(conn.toString()); // Tulostaa vain URLin
+
 //			if (conn==null) {
 //	  			System.out.println("No connection!!!");
 //			}
@@ -81,6 +90,9 @@ public class EV3data extends Thread {
 				s = br.readLine();
 				String[] info = s.split(" ");
 
+
+				//Set values according to database string
+
 				DEObj.setSpeedMotor1(info[0]);
 				DEObj.setSpeedMotor2(info[1]);
 				DEObj.setRotation(info[2]);
@@ -92,8 +104,10 @@ public class EV3data extends Thread {
 				e.printStackTrace();
 				System.out.println("Some problem!");
 			}
+
 			System.out.println("Press any key to FINISH");
 			Button.waitForAnyPress();
+
 		}
 	}
 }
