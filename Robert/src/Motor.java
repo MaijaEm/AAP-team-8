@@ -32,6 +32,12 @@ public class Motor extends Thread {
 	public void run() {
 
 		while (true) {
+			try {
+				Thread.sleep(1);
+			} catch (InterruptedException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 
 			switch (DEObj.getMode()) {
 
@@ -65,13 +71,13 @@ public class Motor extends Thread {
 				if (DEObj.getBrightness_value() < DEObj.getBrightnessThreshold()) {
 					leftMotor.forward();
 					rightMotor.forward();
-					leftMotor.setSpeed(270);
-					rightMotor.setSpeed(90);
+					leftMotor.setSpeed(DEObj.getSpeedMotor1());
+					rightMotor.setSpeed(DEObj.getSpeedMotor2());
 				} else {
 					leftMotor.forward();
 					rightMotor.forward();
-					leftMotor.setSpeed(90);
-					rightMotor.setSpeed(270);
+					leftMotor.setSpeed(DEObj.getSpeedMotor2());
+					rightMotor.setSpeed(DEObj.getSpeedMotor1());
 				}
 				if (DEObj.getDistancevalue() < DEObj.getSecurityDistance()) {
 					leftMotor.stop();
@@ -114,15 +120,15 @@ public class Motor extends Thread {
 			// Back to linefollowing
 			case 5:
 				if (DEObj.getBrightness_value() < DEObj.getBrightnessThreshold()) {
-					leftMotor.setSpeed(270);
-					rightMotor.setSpeed(90);
 					leftMotor.forward();
 					rightMotor.forward();
+					leftMotor.setSpeed(DEObj.getSpeedMotor1());
+					rightMotor.setSpeed(DEObj.getSpeedMotor2());
 				} else {
-					leftMotor.setSpeed(90);
-					rightMotor.setSpeed(270);
 					leftMotor.forward();
 					rightMotor.forward();
+					leftMotor.setSpeed(DEObj.getSpeedMotor2());
+					rightMotor.setSpeed(DEObj.getSpeedMotor1());
 				}
 				if (DEObj.getDistancevalue() < DEObj.getSecurityDistance()) {
 					leftMotor.stop();

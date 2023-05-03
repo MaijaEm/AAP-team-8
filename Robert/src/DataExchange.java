@@ -8,6 +8,8 @@ public class DataExchange {
 	private int brightnessThreshold = 20;
 	private int securityDistance = 10;
 	private int distancevalue;
+	private String SpeedMotor1;
+	private String SpeedMotor2;
 	
 
 	public DataExchange() {
@@ -60,6 +62,22 @@ public class DataExchange {
 
 	public void setDistancevalue(int distancevalue) {
 		this.distancevalue = distancevalue;
+	}
+
+	public int getSpeedMotor1() {
+		return Integer.parseInt(SpeedMotor1);
+	}
+
+	public void setSpeedMotor1(String speedMotor1) {
+		SpeedMotor1 = speedMotor1;
+	}
+
+	public int getSpeedMotor2() {
+		return Integer.parseInt(SpeedMotor2);
+	}
+
+	public void setSpeedMotor2(String speedMotor2) {
+		SpeedMotor2 = speedMotor2;
 	}
 	
 }
